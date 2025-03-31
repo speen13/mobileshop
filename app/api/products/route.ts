@@ -1,43 +1,64 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
-import { parseStringPromise } from "xml2js";
+// // app/api/products/route.ts
+// import { NextResponse } from "next/server";
+// import axios from "axios";
+// import { parseStringPromise } from "xml2js";
+//
+// export async function GET() {
+//     try {
+//         const supplierUrl = "https://ncase.ua/xml2/?key=b2534682dec058ca88bd76e158effff1&lang=ua";
+//
+//         const { data: xmlData } = await axios.get(supplierUrl);
+//         const jsonData = await parseStringPromise(xmlData, { explicitArray: false });
+//
+//         return NextResponse.json(jsonData);
+//     } catch (error: any) {
+//         console.error("Ошибка загрузки XML:", error);
+//         return NextResponse.json({
+//             error: "Ошибка загрузки XML",
+//             details: error.message || "Неизвестная ошибка",
+//         });
+//     }
+// }
+//
+// import { NextResponse } from 'next/server';
+// import fs from 'fs';
+// import path from 'path';
+// import Papa from 'papaparse';
+//
+// export async function GET() {
+//     const filePath = path.join(process.cwd(), 'public/data/products.csv');
+//     const fileContent = fs.readFileSync(filePath, 'utf8');
+//
+//     const { data } = Papa.parse(fileContent, {
+//         header: true,
+//         skipEmptyLines: true,
+//     });
+//
+//     return NextResponse.json(data);
+// }
 
-type XmlResponse = {
-    store: {
-        product: Array<{
-            id: string;
-            name: string;
-            price: {
-                _: number;
-                $: { currency: string };
-            };
-            brand: string;
-        }>;
-    };
-};
+import { NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
+import Papa from 'papaparse';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
     try {
-        const supplierUrl =
-            "https://ncase.ua/xml2/?key=b2534682dec058ca88bd76e158effff1&lang=ua";
+        const filePath = path.join(process.cwd(), 'public/data/products.csv');
 
-        // Загружаем XML
-        const { data: xmlData } = await axios.get(supplierUrl, { timeout: 10000 });
+        // Проверяем, существует ли файл
+        if (!fs.existsSync(filePath)) {
+            return NextResponse.json({ error: 'Файл products.csv не найден' }, { status: 404 });
+        }
 
-        // Конвертируем XML в JSON
-        const jsonData: XmlResponse = await parseStringPromise(xmlData, {
-            explicitArray: false,
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const { data } = Papa.parse(fileContent, {
+            header: true,
+            skipEmptyLines: true,
         });
 
-        res.status(200).json(jsonData);
-    } catch (error: any) {
-        // Логирование ошибки
-        console.error("Ошибка загрузки XML:", error);
-
-        // Отправка ошибки в ответ
-        res.status(500).json({
-            error: "Ошибка загрузки XML",
-            details: error.message || "Неизвестная ошибка",
-        });
+        return NextResponse.json(data);  // Отправляем данные как JSON
+    } catch (error) {
+        return NextResponse.json({ error: 'Ошибка при загрузке данных' }, { status: 500 });
     }
 }
