@@ -634,7 +634,8 @@ export default function CartPage() {
                             <div key={index} className="flex items-center justify-between border-b py-4">
                                 <img src={product.Фото} alt={product.Найменування} className="w-16 h-16 object-cover rounded-md" />
                                 <p className="text-lg">{product.Найменування}</p>
-                                <p className="text-lg font-bold">{Math.round(product.Ціна)} грн</p>
+                                {/*<p className="text-lg font-bold">{Math.round(product.Ціна)} грн</p>*/}
+                                <p className="text-lg font-bold">{Math.round(Number(product.Ціна))} грн</p>
                                 <button
                                     onClick={() => handleRemoveFromCart(index)}
                                     className="text-red-500 hover:text-red-700"
