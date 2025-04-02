@@ -648,9 +648,8 @@ export default function CartPage() {
                         <div className="mt-6 text-xl font-bold text-right">
                             Общая сумма: {totalPrice.toFixed(2)} грн
                         </div>
-
-                        <form onSubmit={handleSubmit} className="mt-8 p-4 border rounded-md shadow-md bg-white">
-                            <h2 className="text-2xl font-semibold mb-4">Оформление заказа</h2>
+                        <form onSubmit={handleSubmit} className="mt-8 p-4 border rounded-md shadow-md bg-white dark:bg-[#1E1E1E]">
+                            <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Оформление заказа</h2>
 
                             {[
                                 { label: "Имя", name: "firstName", type: "text" },
@@ -659,14 +658,14 @@ export default function CartPage() {
                                 { label: "Email", name: "email", type: "email" }
                             ].map(({ label, name, type }) => (
                                 <div key={name} className="mb-4">
-                                    <label className="block text-gray-700">{label}</label>
+                                    <label className="block text-gray-700 dark:text-gray-300">{label}</label>
                                     <input
                                         type={type}
                                         name={name}
                                         value={formData[name as keyof typeof formData]}
                                         onChange={handleChange}
                                         required
-                                        className={`w-full p-2 border rounded-md ${errors[name as keyof typeof errors] ? 'border-red-500' : ''}`}
+                                        className={`w-full p-2 border rounded-md bg-white dark:bg-[#2C2C2C] text-black dark:text-white border-gray-300 dark:border-gray-600 ${errors[name as keyof typeof errors] ? 'border-red-500' : ''}`}
                                     />
                                     {errors[name as keyof typeof errors] && (
                                         <p className="text-red-500 text-sm mt-1">{errors[name as keyof typeof errors]}</p>
@@ -678,7 +677,7 @@ export default function CartPage() {
 
                             <button
                                 type="submit"
-                                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 mt-4"
+                                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 mt-4"
                             >
                                 Оформить заказ
                             </button>

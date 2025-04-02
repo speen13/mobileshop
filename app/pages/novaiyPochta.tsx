@@ -402,25 +402,28 @@ export default function NovaPoshtaSelection({ onSelectionChange }: NovaPoshtaSel
         onSelectionChange(selectedCity, warehouseName);
     };
 
-    return (
-        <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-            <h1 className="text-2xl font-bold text-center mb-4 dark:text-black">Выбор доставки Новой Почты</h1>
+    return (<div className="max-w-4xl mx-auto p-6 bg-white dark:bg-[#1E1E1E] shadow-lg rounded-lg">
+            <h1 className="text-2xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+                Выбор доставки Новой Почты
+            </h1>
 
             <div className="mb-4 relative">
-                <label className="block text-sm font-medium text-gray-700">Введите город:</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Введите город:
+                </label>
                 <input
                     type="text"
                     value={searchQuery}
                     onChange={handleSearchChange}
                     placeholder="Поиск города..."
-                    className="w-full px-4 py-2 border rounded-md mt-1 dark:text-black"
+                    className="w-full px-4 py-2 border rounded-md mt-1 bg-white dark:bg-[#2C2C2C] text-black dark:text-white border-gray-300 dark:border-gray-600"
                 />
                 {showDropdown && filteredCities.length > 0 && (
-                    <ul className="absolute z-10 w-full px-4 py-2 border rounded-md mt-1 bg-white dark:text-black shadow-md max-h-60 overflow-auto">
+                    <ul className="absolute z-10 w-full px-4 py-2 border rounded-md mt-1 bg-white dark:bg-[#2C2C2C] dark:text-white shadow-md max-h-60 overflow-auto">
                         {filteredCities.map((city) => (
                             <li
                                 key={city.Ref}
-                                className="cursor-pointer hover:bg-gray-200 p-2"
+                                className="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 p-2"
                                 onClick={() => handleCitySelect(city.Description)}
                             >
                                 {city.Description}
@@ -432,11 +435,13 @@ export default function NovaPoshtaSelection({ onSelectionChange }: NovaPoshtaSel
 
             {selectedCity && (
                 <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Выберите отделение:</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Выберите отделение:
+                    </label>
                     <select
                         value={selectedWarehouse}
                         onChange={(e) => handleWarehouseSelect(e.target.value)}
-                        className="w-full px-4 py-2 border rounded-md mt-1 dark:text-black"
+                        className="w-full px-4 py-2 border rounded-md mt-1 bg-white dark:bg-[#2C2C2C] text-black dark:text-white border-gray-300 dark:border-gray-600"
                     >
                         <option value="">-- Выберите отделение --</option>
                         {warehouses.map((wh) => (
@@ -449,7 +454,7 @@ export default function NovaPoshtaSelection({ onSelectionChange }: NovaPoshtaSel
             )}
 
             {selectedWarehouse && (
-                <div className="mt-4 p-4 bg-green-100 border border-green-400 rounded-md text-green-700">
+                <div className="mt-4 p-4 bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-600 rounded-md text-green-700 dark:text-green-300">
                     <p><strong>Вы выбрали:</strong></p>
                     <p>Город: {selectedCity}</p>
                     <p>Отделение: {selectedWarehouse}</p>
