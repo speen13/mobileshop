@@ -424,6 +424,7 @@ import Link from 'next/link';
 import Papa from "papaparse";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import {Skeleton} from "@/components/ui/skeleton";
 
 interface SearchPageProps {
     filter: string; // Фильтр категории из Sidebar
@@ -484,7 +485,19 @@ export default function SearchPage({ filter }: SearchPageProps) {
         setBrands(filteredBrands);
     }, [filter, products]);
 
-    if (loading) return <p>Загрузка...</p>;
+    if (loading) {
+        return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {Array.from({ length: 12 }).map((_, index) => (
+                    <div key={index} className="bg-white border border-gray-300 rounded-lg p-4 shadow-lg">
+                        <Skeleton className="h-40 w-full rounded-md mb-4" />
+                        <Skeleton className="h-6 w-3/4 mb-2" />
+                        <Skeleton className="h-6 w-1/2" />
+                    </div>
+                ))}
+            </div>
+        );
+    }
     if (error) return <p>{error}</p>;
 
     const filteredProducts = products.filter((product) => {
