@@ -137,6 +137,8 @@
 //     );
 // }
 
+
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -207,27 +209,32 @@ export default function ProductPage() {
                             Ціна: {Math.round(parseFloat(product["Ціна"]))} грн
                         </p>
 
-                        {product.Фото ? (
-                            <div className="flex flex-wrap gap-4">
-                                {product.Фото.split(',').map((img, index) => (
-                                    <img
-                                        key={index}
-                                        src={img.trim()}
-                                        alt={product.Найменування}
-                                        className="w-96 h-96 object-cover border rounded-md shadow-lg"
-                                    />
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="text-gray-500">Фото отсутствует</p>
-                        )}
+                        <div className="flex flex-col gap-4">
+                            {product.Фото ? (
+                                <div className="flex flex-wrap gap-4">
+                                    {product.Фото.split(',').map((img, index) => (
+                                        <img
+                                            key={index}
+                                            src={img.trim()}
+                                            alt={product.Найменування}
+                                            className="w-96 h-96 object-cover border rounded-md shadow-lg"
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-gray-500">Фото отсутствует</p>
+                            )}
 
-                        <button
-                            onClick={handleAddToCart}
-                            className="mt-4 bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition"
-                        >
-                            Купить
-                        </button>
+                            <div className="w-96">
+                                <button
+                                    onClick={handleAddToCart}
+                                    className="w-full bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition"
+                                >
+                                    Купить
+                                </button>
+                            </div>
+
+                        </div>
                     </>
                 ) : (
                     <p>Товар не найден</p>
@@ -236,6 +243,108 @@ export default function ProductPage() {
         </>
     );
 }
+
+
+//
+// 'use client';
+//
+// import { useEffect, useState } from 'react';
+// import { useParams, useRouter } from 'next/navigation';
+// import Navbar from "@/app/navbar";
+// import { Skeleton } from "@/components/ui/skeleton";
+//
+// interface Product {
+//     Артикул: string;
+//     Найменування: string;
+//     Ціна: string;
+//     Фото?: string;
+// }
+//
+// export default function ProductPage() {
+//     const [product, setProduct] = useState<Product | null>(null);
+//     const [loading, setLoading] = useState(true);
+//     const params = useParams();
+//     const router = useRouter();
+//
+//     useEffect(() => {
+//         if (!params.id) return;
+//
+//         const fetchProduct = async () => {
+//             const res = await fetch('/api/products');
+//             const products: Product[] = await res.json();
+//             const foundProduct = products.find((p) => p.Артикул === params.id);
+//
+//             if (!foundProduct) {
+//                 router.push('/404');
+//             } else {
+//                 setProduct(foundProduct);
+//             }
+//             setLoading(false);
+//         };
+//
+//         fetchProduct();
+//     }, [params.id]);
+//
+//     const handleAddToCart = () => {
+//         if (!product) return;
+//
+//         const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+//         cart.push(product);
+//         localStorage.setItem('cart', JSON.stringify(cart));
+//
+//         router.push('/cart');
+//     };
+//
+//     return (
+//         <>
+//             <Navbar />
+//             <div className="max-w-4xl mx-auto p-4">
+//                 {loading ? (
+//                     <div className="space-y-4">
+//                         <Skeleton className="h-8 w-3/4" />
+//                         <Skeleton className="h-6 w-1/4" />
+//                         <div className="flex gap-4">
+//                             <Skeleton className="w-96 h-96" />
+//                             <Skeleton className="w-96 h-96" />
+//                         </div>
+//                         <Skeleton className="h-10 w-32" />
+//                     </div>
+//                 ) : product ? (
+//                     <>
+//                         <h1 className="text-3xl font-bold mb-4">{product.Найменування}</h1>
+//                         <p className="text-xl font-semibold text-gray-800 mb-4 dark:text-white">
+//                             Ціна: {Math.round(parseFloat(product["Ціна"]))} грн
+//                         </p>
+//
+//                         {product.Фото ? (
+//                             <div className="flex flex-wrap gap-4">
+//                                 {product.Фото.split(',').map((img, index) => (
+//                                     <img
+//                                         key={index}
+//                                         src={img.trim()}
+//                                         alt={product.Найменування}
+//                                         className="w-96 h-96 object-cover border rounded-md shadow-lg"
+//                                     />
+//                                 ))}
+//                             </div>
+//                         ) : (
+//                             <p className="text-gray-500">Фото отсутствует</p>
+//                         )}
+//
+//                         <button
+//                             onClick={handleAddToCart}
+//                             className="mt-4 w-full bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition"
+//                         >
+//                             Купить
+//                         </button>
+//                     </>
+//                 ) : (
+//                     <p>Товар не найден</p>
+//                 )}
+//             </div>
+//         </>
+//     );
+// }
 
 //
 // 'use client';
