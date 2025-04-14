@@ -3,9 +3,16 @@
 
 import * as React from 'react'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { ThemeProviderProps } from 'next-themes/dist/types'
+import type { ReactNode } from 'react'
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+interface Props {
+    children: ReactNode
+    attribute?: 'class' | 'data-theme'
+    defaultTheme?: string
+    enableSystem?: boolean
+}
+
+export function ThemeProvider({ children, ...props }: Props) {
     const [mounted, setMounted] = React.useState(false)
 
     React.useEffect(() => {
@@ -13,7 +20,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     }, [])
 
     if (!mounted) {
-        return <div style={{ visibility: 'hidden' }}>{children}</div> // или можно return null
+        return <div style={{ visibility: 'hidden' }}>{children}</div>
     }
 
     return <NextThemesProvider {...props}>{children}</NextThemesProvider>
