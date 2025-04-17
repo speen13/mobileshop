@@ -121,7 +121,7 @@ export default function SearchPage({ filter }: SearchPageProps) {
                     displayedProducts.map((product: any, index: number) => (
                         <Link key={product["Артикул"] || index} href={`/product/${product["Артикул"] || index}`} className="block">
                             <div className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
-                                <h3 className="text-xl font-semibold mb-4 dark:text-white">{product["Найменування"]}</h3>
+                                <h3 className="overflow-hidden text-xl font-semibold mb-4 dark:text-white">{product["Найменування"]}</h3>
                                 {product["Фото"] && (
                                     <div className="mb-4">
                                         <Swiper spaceBetween={10} slidesPerView={1} navigation pagination={{ clickable: true }} loop>

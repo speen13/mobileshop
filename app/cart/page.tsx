@@ -208,7 +208,7 @@ export default function CartPage() {
 
                             <button
                                 type="submit"
-                                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 mt-4"
+                                className="cursor-pointer w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 mt-4"
                             >
                                 Оформить заказ
                             </button>
