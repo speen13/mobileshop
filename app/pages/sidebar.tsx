@@ -143,11 +143,24 @@ export default function Sidebar({ onFilter }: SidebarProps) {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [isOpen, setIsOpen] = useState(false);
 
+    // const handleFilter = (category: string) => {
+    //     const newCategory = category === selectedCategory ? null : category;
+    //     setSelectedCategory(newCategory);
+    //     onFilter(newCategory || "");
+    //     setIsOpen(false);
+    // };
+
     const handleFilter = (category: string) => {
         const newCategory = category === selectedCategory ? null : category;
         setSelectedCategory(newCategory);
         onFilter(newCategory || "");
         setIsOpen(false);
+
+        // Прокрутка вверх
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
     };
 
     return (
