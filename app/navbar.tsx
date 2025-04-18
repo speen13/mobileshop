@@ -295,7 +295,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import {ShoppingCartIcon, StoreIcon} from "lucide-react";
+import {HomeIcon, ShoppingCartIcon, StoreIcon} from "lucide-react";
 
 export default function Navbar() {
     const [cartCount, setCartCount] = useState(0);
@@ -338,8 +338,8 @@ export default function Navbar() {
                     href="/"
                     className="flex items-center justify-center gap-2 flex-1 md:justify-start group transition-transform"
                 >
-                    <div className="p-2 rounded-full bg-blue-500 hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 shadow-md animate-spin-slow">
-                        <StoreIcon className="h-6 w-6 text-white" />
+                    <div className="p-2 rounded-md bg-blue-500 hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 shadow-md animate-spin-slow">
+                        <HomeIcon className="h-6 w-6 text-white" />
                     </div>
                 </Link>
                 <Link href="/cart" className="relative px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 flex items-center gap-2">
