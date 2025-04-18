@@ -75,7 +75,7 @@ export default function Navbar() {
                 <Link href="/cart" className="relative px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 flex items-center gap-2">
                     <span>Корзина</span>
                     <div className="relative">
-                        <ShoppingCartIcon className="h-6 w-6 text-white" />
+                        <ShoppingCartIcon className="h-5 w-5 text-white" />
                         {cartCount > 0 && (
                             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs min-w-[20px] h-[20px] rounded-full flex items-center justify-center px-[6px]">
                                 {cartCount}

@@ -67,6 +67,10 @@ export default function SearchPage({ filter }: SearchPageProps) {
         setBrands(filteredBrands);
     }, [filter, products]);
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage]);
+
     if (loading) {
         return (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -142,15 +146,11 @@ export default function SearchPage({ filter }: SearchPageProps) {
                 )}
             </div>
 
-            {/*<div className="flex justify-center items-center mt-6 space-x-4">*/}
-            {/*    <button className="px-4 py-2 border rounded-md bg-blue-500 text-white hover:bg-blue-600" onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1}>Назад</button>*/}
-            {/*    <span>Страница {currentPage} из {totalPages}</span>*/}
-            {/*    <button className="px-4 py-2 border rounded-md bg-blue-500 text-white hover:bg-blue-600" onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}>Вперед</button>*/}
-            {/*</div>*/}
+
 
             <div className="flex justify-center items-center mt-6 flex-wrap gap-2">
                 <button
-                    className="px-3 py-1 border rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50"
+                    className="cursor-pointer px-3 py-1 border rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50"
                     onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                     disabled={currentPage === 1}
                 >
@@ -174,11 +174,11 @@ export default function SearchPage({ filter }: SearchPageProps) {
                         ) : (
                             <button
                                 key={page}
-                                className={`px-3 py-1 border rounded-md ${
+                                className={`cursor-pointer px-3 py-1 border rounded-md ${
                                     currentPage === page
                                         ? 'bg-blue-700 text-white'
                                         : 'bg-white dark:bg-gray-700 text-black dark:text-white'
-                                } hover:bg-blue-500 hover:text-white transition`}
+                                } hover:bg-blue-500 hover:text-white transition cursor-pointer`}
                                 onClick={() => setCurrentPage(page)}
                             >
                                 {page}
@@ -187,7 +187,7 @@ export default function SearchPage({ filter }: SearchPageProps) {
                     )}
 
                 <button
-                    className="px-3 py-1 border rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50"
+                    className="cursor-pointer px-3 py-1 border rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50"
                     onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                     disabled={currentPage === totalPages}
                 >
