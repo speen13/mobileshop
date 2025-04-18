@@ -172,7 +172,7 @@ export default function Sidebar({ onFilter }: SidebarProps) {
             <aside
                 className={`${
                     isOpen ? "translate-x-0" : "-translate-x-full"
-                } transition-transform duration-300 ease-in-out fixed left-0 h-full w-64 bg-gradient-to-b from-gray-800 to-gray-900 text-white p-6 z-50 shadow-2xl md:relative md:h-auto md:w-64 md:bg-transparent md:shadow-none md:translate-x-0 md:top-12 md:z-auto`}
+                } rounded-lg  transition-transform duration-300 ease-in-out fixed left-0 h-full w-64 bg-gradient-to-b from-gray-800 to-gray-900 text-white p-6 z-50 shadow-2xl md:relative md:h-auto md:w-64 md:bg-transparent md:shadow-none md:translate-x-0 md:top-12 md:z-auto`}
             >
                 <h2 className="text-2xl font-semibold mb-6 border-b border-gray-600 pb-2">Категорії</h2>
                 <ul className="space-y-2">
