@@ -325,11 +325,20 @@ export default function Navbar() {
                 {/*<Link href="/" className="text-xl font-bold flex-1 text-center md:text-left">*/}
                 {/*    Головна*/}
                 {/*</Link>*/}
+                {/*<Link*/}
+                {/*    href="/"*/}
+                {/*    className="flex items-center justify-center gap-2 flex-1 md:justify-start group transition-transform"*/}
+                {/*>*/}
+                {/*    <div className="p-2 rounded-full bg-gray-700 group-hover:bg-blue-600 transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-[360deg] shadow-md">*/}
+                {/*        <StoreIcon className="h-6 w-6 text-white" />*/}
+                {/*    </div>*/}
+                {/*</Link>*/}
+
                 <Link
                     href="/"
                     className="flex items-center justify-center gap-2 flex-1 md:justify-start group transition-transform"
                 >
-                    <div className="p-2 rounded-full bg-gray-700 group-hover:bg-blue-600 transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-[360deg] shadow-md">
+                    <div className="p-2 rounded-full bg-blue-500 hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 shadow-md animate-spin-slow">
                         <StoreIcon className="h-6 w-6 text-white" />
                     </div>
                 </Link>
@@ -344,6 +353,8 @@ export default function Navbar() {
                         )}
                     </div>
                 </Link>
+
+
             </div>
         </nav>
         </div>
