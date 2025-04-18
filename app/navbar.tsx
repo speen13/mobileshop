@@ -317,6 +317,9 @@ export default function Navbar() {
     }, []);
 
     return (
+        <div className='pt-20'>
+
+
         <nav className="bg-gray-800 text-white p-4 fixed top-0 left-0 w-full z-50 shadow-md backdrop-blur-sm">
             <div className="flex items-center justify-center md:justify-between">
                 <Link href="/" className="text-xl font-bold flex-1 text-center md:text-left">
@@ -335,5 +338,6 @@ export default function Navbar() {
                 </Link>
             </div>
         </nav>
+        </div>
     );
 }
