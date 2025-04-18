@@ -7,6 +7,11 @@ import Papa from "papaparse";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import {Skeleton} from "@/components/ui/skeleton";
+import { ChevronLeft, ChevronRight } from 'lucide-react'; // добавь импорт иконок
+import { Navigation } from 'swiper/modules'; // импорт Swiper Navigation
+
+// Добавь хук useRef:
+import { useRef } from "react";
 
 interface SearchPageProps {
     filter: string; // Фильтр категории из Sidebar
@@ -21,6 +26,8 @@ export default function SearchPage({ filter }: SearchPageProps) {
     const [brands, setBrands] = useState<string[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
+    const prevRef = useRef<HTMLButtonElement>(null);
+    const nextRef = useRef<HTMLButtonElement>(null);
 
     const categorizeProduct = (product: any) => {
         const name = product["Найменування"]?.toLowerCase();
@@ -126,12 +133,57 @@ export default function SearchPage({ filter }: SearchPageProps) {
                         <Link key={product["Артикул"] || index} href={`/product/${product["Артикул"] || index}`} className="block">
                             <div className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
                                 <h3 className="overflow-hidden text-xl font-semibold mb-4 dark:text-white">{product["Найменування"]}</h3>
+                                {/*{product["Фото"] && (*/}
+                                {/*    <div className="mb-4">*/}
+                                {/*        <Swiper spaceBetween={10} slidesPerView={1} navigation pagination={{ clickable: true }} loop>*/}
+                                {/*            {product["Фото"].split(",").map((imageUrl: string, imgIndex: number) => (*/}
+                                {/*                <SwiperSlide key={imgIndex}>*/}
+                                {/*                    <img src={imageUrl.trim()} alt={product["Найменування"]} className="w-full h-auto rounded-md" />*/}
+                                {/*                </SwiperSlide>*/}
+                                {/*            ))}*/}
+                                {/*        </Swiper>*/}
+                                {/*    </div>*/}
+                                {/*)}*/}
+
                                 {product["Фото"] && (
-                                    <div className="mb-4">
-                                        <Swiper spaceBetween={10} slidesPerView={1} navigation pagination={{ clickable: true }} loop>
+                                    <div className="mb-4 relative">
+                                        {/* Кастомные стрелки */}
+                                        <button
+                                            ref={prevRef}
+                                            className="absolute top-1/2 left-2 z-10 -translate-y-1/2 bg-white/90 hover:bg-white text-black rounded-full p-2 shadow-md"
+                                        >
+                                            <ChevronLeft size={24} />
+                                        </button>
+                                        <button
+                                            ref={nextRef}
+                                            className="absolute top-1/2 right-2 z-10 -translate-y-1/2 bg-white/90 hover:bg-white text-black rounded-full p-2 shadow-md"
+                                        >
+                                            <ChevronRight size={24} />
+                                        </button>
+
+                                        <Swiper
+                                            spaceBetween={10}
+                                            slidesPerView={1}
+                                            loop
+                                            modules={[Navigation]}
+                                            navigation={{
+                                                prevEl: prevRef.current,
+                                                nextEl: nextRef.current,
+                                            }}
+                                            onBeforeInit={(swiper) => {
+                                                // @ts-ignore
+                                                swiper.params.navigation.prevEl = prevRef.current;
+                                                // @ts-ignore
+                                                swiper.params.navigation.nextEl = nextRef.current;
+                                            }}
+                                        >
                                             {product["Фото"].split(",").map((imageUrl: string, imgIndex: number) => (
                                                 <SwiperSlide key={imgIndex}>
-                                                    <img src={imageUrl.trim()} alt={product["Найменування"]} className="w-full h-auto rounded-md" />
+                                                    <img
+                                                        src={imageUrl.trim()}
+                                                        alt={product["Найменування"]}
+                                                        className="w-full h-auto rounded-md"
+                                                    />
                                                 </SwiperSlide>
                                             ))}
                                         </Swiper>
