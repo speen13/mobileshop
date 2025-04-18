@@ -193,10 +193,7 @@ export default function ProductPage() {
                     </div>
                 ) : product ? (
                     <>
-                        {/*<h1 className="text-3xl font-bold mb-4">{product.Найменування}</h1>*/}
-                        {/*<p className="text-xl font-semibold text-gray-800 mb-6 dark:text-white">*/}
-                        {/*    Ціна: {Math.round(parseFloat(product["Ціна"]))} грн*/}
-                        {/*</p>*/}
+
 
                         <div className="text-center">
                             <h1 className="text-3xl font-bold mb-4">{product.Найменування}</h1>
